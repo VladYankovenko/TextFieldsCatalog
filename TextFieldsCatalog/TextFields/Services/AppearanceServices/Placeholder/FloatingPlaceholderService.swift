@@ -95,28 +95,35 @@ private extension FloatingPlaceholderService {
                      fieldState: FieldState,
                      containerState: FieldContainerState?,
                      animated: Bool) {
-        // The idea of updating layer with animation was to do it with `CAAnimationGroup` (how realized below).
-        // While animation without animation should be made without `CAAnimationGroup` - just
-        // fill with final properties inside `CATransaction` (to avoid implicit animation).
-        // But in practice, CATextLayer animated in CATransaction very bad - sometimes implicit animation
-        // still exists.
-        // The solution of this problem - to make changing state of layer with `CAAnimationGroup` with
-        // very small `duration`
+        guard animated else {
+            setFinalPropertiesWithoutAnimationForUpdateTypes(types,
+                                                             fieldState: fieldState,
+                                                             containerState: containerState)
+            return
+        }
 
+        CATransaction.begin()
+        CATransaction.setCompletionBlock { [weak self] in
+            self?.setFinalPropertiesWithoutAnimationForUpdateTypes(types,
+                                                                   fieldState: fieldState,
+                                                                   containerState: containerState)
+        }
         let groupAnimation = CAAnimationGroup()
+        groupAnimation.fillMode = .forwards
+        groupAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+
+        groupAnimation.duration = AnimationTime.default
+        groupAnimation.isRemovedOnCompletion = false
+
         groupAnimation.animations = types.flatMap {
             return getAnimationsForUpdateType($0,
                                               fieldState: fieldState,
                                               containerState: containerState)
         }
-        groupAnimation.duration = animated ? AnimationTime.default : 0.001
-        groupAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        setFinalPropertiesWithoutAnimationForUpdateTypes(types,
-                                                         fieldState: fieldState,
-                                                         containerState: containerState)
+        groupAnimation.beginTime = CACurrentMediaTime()
         placeholder.add(groupAnimation, forKey: "placeholder_mixed_animation")
+        CATransaction.commit()
     }
-
     func getAnimationsForUpdateType(_ type: UpdateType,
                                     fieldState: FieldState,
                                     containerState: FieldContainerState?) -> [CAAnimation] {
@@ -162,12 +169,11 @@ private extension FloatingPlaceholderService {
     func setFinalPropertiesWithoutAnimationForUpdateTypes(_ types: [UpdateType],
                                                           fieldState: FieldState,
                                                           containerState: FieldContainerState?) {
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
         types.forEach {
-            setFinalPropertiesWithoutAnimationForUpdateType($0, fieldState: fieldState, containerState: containerState)
+            setFinalPropertiesWithoutAnimationForUpdateType($0,
+                                                            fieldState: fieldState,
+                                                            containerState: containerState)
         }
-        CATransaction.commit()
     }
 
     func setFinalPropertiesWithoutAnimationForUpdateType(_ type: UpdateType,
