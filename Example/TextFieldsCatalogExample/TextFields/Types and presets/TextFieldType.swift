@@ -69,7 +69,9 @@ enum TextFieldType: CaseIterable {
         case .customUnderlined:
             return CustomUnderlinedTextField(frame: frame)
         case .underlinedTextView:
-            return UnderlinedTextView(frame: frame)
+            let textView = UnderlinedTextView(frame: frame)
+            textView.configureDefaultLayout()
+            return textView
         case .sumTextField:
             return SumTextField(frame: frame)
         }
