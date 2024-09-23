@@ -38,6 +38,10 @@ final class CustomUnderlinedTextField: UnderlinedTextField {
 private extension CustomUnderlinedTextField {
 
     func configureAppearance() {
+        configureTextFieldLayout()
+        configureHintLabelLayout()
+        configureActionButtonLayout()
+
         let configuration = UnderlinedTextFieldConfiguration()
         configuration.line = LineConfiguration(insets: UIEdgeInsets(top: 5, left: 16, bottom: 0, right: 16),
                                                defaultHeight: 1,
@@ -76,6 +80,39 @@ private extension CustomUnderlinedTextField {
         self.setup(placeholderServices: [NativePlaceholderService(configuration: placeholderConfig)])
 
         self.validationPolicy = .afterChanges
+    }
+
+}
+
+// MARK: - Layout
+
+private extension CustomUnderlinedTextField {
+
+    func configureTextFieldLayout() {
+        NSLayoutConstraint.activate([
+            textField.topAnchor.constraint(equalTo: topAnchor, constant: 28),
+            textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            textField.heightAnchor.constraint(equalToConstant: 30)
+        ])
+    }
+
+    func configureHintLabelLayout() {
+        NSLayoutConstraint.activate([
+            hintLabel.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            hintLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            hintLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            hintLabel.heightAnchor.constraint(equalToConstant: 0)
+        ])
+    }
+
+    func configureActionButtonLayout() {
+        NSLayoutConstraint.activate([
+            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            actionButton.heightAnchor.constraint(equalToConstant: 40),
+            actionButton.widthAnchor.constraint(equalToConstant: 44),
+            actionButton.topAnchor.constraint(equalTo: hintLabel.bottomAnchor, constant: 20)
+        ])
     }
 
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,7 +19,6 @@
 		902CE2F521FF70C500AC21D4 /* TextFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CE2F421FF70C500AC21D4 /* TextFieldValidator.swift */; };
 		902CE2F821FF70E500AC21D4 /* ConfigurationParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CE2F721FF70E500AC21D4 /* ConfigurationParameters.swift */; };
 		902CE2FA21FF710400AC21D4 /* TextFieldConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CE2F921FF710400AC21D4 /* TextFieldConfigurations.swift */; };
-		902CE30121FF719B00AC21D4 /* UnderlinedTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 902CE2FF21FF719B00AC21D4 /* UnderlinedTextField.xib */; };
 		902CE30221FF719B00AC21D4 /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CE30021FF719B00AC21D4 /* UnderlinedTextField.swift */; };
 		903863DF21FF550D00BAA761 /* TextFieldsCatalog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 903863D521FF550D00BAA761 /* TextFieldsCatalog.framework */; };
 		903863E621FF550D00BAA761 /* TextFieldsCatalog.h in Headers */ = {isa = PBXBuildFile; fileRef = 903863D821FF550D00BAA761 /* TextFieldsCatalog.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -121,7 +120,6 @@
 		902CE2F421FF70C500AC21D4 /* TextFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidator.swift; sourceTree = "<group>"; };
 		902CE2F721FF70E500AC21D4 /* ConfigurationParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationParameters.swift; sourceTree = "<group>"; };
 		902CE2F921FF710400AC21D4 /* TextFieldConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfigurations.swift; sourceTree = "<group>"; };
-		902CE2FF21FF719B00AC21D4 /* UnderlinedTextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnderlinedTextField.xib; sourceTree = "<group>"; };
 		902CE30021FF719B00AC21D4 /* UnderlinedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		903863D521FF550D00BAA761 /* TextFieldsCatalog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextFieldsCatalog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		903863D821FF550D00BAA761 /* TextFieldsCatalog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextFieldsCatalog.h; sourceTree = "<group>"; };
@@ -431,7 +429,6 @@
 			isa = PBXGroup;
 			children = (
 				902CE30021FF719B00AC21D4 /* UnderlinedTextField.swift */,
-				902CE2FF21FF719B00AC21D4 /* UnderlinedTextField.xib */,
 			);
 			path = UnderlinedTextField;
 			sourceTree = "<group>";
@@ -712,7 +709,6 @@
 				90BB4732220065F000F6DB39 /* eyeOn.png in Resources */,
 				909F2582229BE14E006926E7 /* UnderlinedTextView.xib in Resources */,
 				909F259D229C39DD006926E7 /* close.png in Resources */,
-				902CE30121FF719B00AC21D4 /* UnderlinedTextField.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

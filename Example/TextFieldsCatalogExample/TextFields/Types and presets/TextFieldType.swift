@@ -61,7 +61,9 @@ enum TextFieldType: CaseIterable {
     func createField(for frame: CGRect) -> UIView {
         switch self {
         case .underlined:
-            return UnderlinedTextField(frame: frame)
+            let textField = UnderlinedTextField(frame: frame)
+            textField.configureDefaultLayout()
+            return textField
         case .box:
             return BoxTextField(frame: frame)
         case .customUnderlined:
