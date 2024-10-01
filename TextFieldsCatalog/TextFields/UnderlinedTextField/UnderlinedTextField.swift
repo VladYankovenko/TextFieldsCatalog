@@ -163,7 +163,6 @@ open class UnderlinedTextField: UIView, ResetableField, RespondableField {
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        configureSubviews()
         configureServices()
         configureAppearance()
     }
@@ -176,7 +175,6 @@ open class UnderlinedTextField: UIView, ResetableField, RespondableField {
 
     override open func awakeFromNib() {
         super.awakeFromNib()
-        configureSubviews()
         configureServices()
         configureAppearance()
     }
@@ -348,6 +346,8 @@ open class UnderlinedTextField: UIView, ResetableField, RespondableField {
 
     /// Use when you don't need custom constraints
     public func configureDefaultLayout() {
+        addSubview(textField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             textField.topAnchor.constraint(equalTo: topAnchor, constant: 18),
             textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -355,6 +355,8 @@ open class UnderlinedTextField: UIView, ResetableField, RespondableField {
             textField.heightAnchor.constraint(equalToConstant: 30)
         ])
 
+        addSubview(hintLabel)
+        hintLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             hintLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 9),
             hintLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -362,12 +364,15 @@ open class UnderlinedTextField: UIView, ResetableField, RespondableField {
             hintLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 15)
         ])
 
+        addSubview(actionButton)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             actionButton.heightAnchor.constraint(equalToConstant: 44),
             actionButton.widthAnchor.constraint(equalToConstant: 44),
             actionButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor)
         ])
+        configuration = UnderlinedTextFieldConfiguration()
     }
 
 }
@@ -805,23 +810,6 @@ private extension UnderlinedTextField {
                 animationBlock()
             }
         }
-    }
-
-}
-
-// MARK: - Layout
-
-private extension UnderlinedTextField {
-
-    func configureSubviews() {
-        addSubview(textField)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-
-        addSubview(hintLabel)
-        hintLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        addSubview(actionButton)
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
     }
 
 }

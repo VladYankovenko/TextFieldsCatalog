@@ -153,6 +153,8 @@ private extension BoxTextField {
     }
 
     func configureTextFieldLayout() {
+        addSubview(textField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             textField.topAnchor.constraint(equalTo: topAnchor, constant: 49),
             textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -162,6 +164,8 @@ private extension BoxTextField {
     }
 
     func configureHintLabelLayout() {
+        addSubview(hintLabel)
+        hintLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             hintLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 6),
             hintLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -171,6 +175,8 @@ private extension BoxTextField {
     }
 
     func configureActionButtonLayout() {
+        addSubview(actionButton)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             actionButton.heightAnchor.constraint(equalToConstant: 44),

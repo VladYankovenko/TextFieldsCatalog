@@ -89,6 +89,8 @@ private extension CustomUnderlinedTextField {
 private extension CustomUnderlinedTextField {
 
     func configureTextFieldLayout() {
+        addSubview(textField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             textField.topAnchor.constraint(equalTo: topAnchor, constant: 28),
             textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -98,6 +100,8 @@ private extension CustomUnderlinedTextField {
     }
 
     func configureHintLabelLayout() {
+        addSubview(hintLabel)
+        hintLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             hintLabel.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             hintLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -107,6 +111,8 @@ private extension CustomUnderlinedTextField {
     }
 
     func configureActionButtonLayout() {
+        addSubview(actionButton)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             actionButton.heightAnchor.constraint(equalToConstant: 40),
