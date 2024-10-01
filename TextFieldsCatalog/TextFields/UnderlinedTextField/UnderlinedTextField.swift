@@ -607,7 +607,7 @@ private extension UnderlinedTextField {
         fieldService?.updateContent(containerState: containerState)
         lineService?.updateContent(fieldState: state,
                                    containerState: containerState,
-                                   strategy: .frame,
+                                   strategy: .height,
                                    animated: animated)
         hintService.updateContent(containerState: containerState,
                                   heightLayoutPolicy: heightLayoutPolicy,
