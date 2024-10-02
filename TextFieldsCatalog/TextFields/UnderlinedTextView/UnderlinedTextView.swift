@@ -143,7 +143,6 @@ open class UnderlinedTextView: UIView, ResetableField, RespondableField {
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        configureSubviews()
         configureServices()
         configureAppearance()
     }
@@ -156,7 +155,6 @@ open class UnderlinedTextView: UIView, ResetableField, RespondableField {
 
     override open func awakeFromNib() {
         super.awakeFromNib()
-        configureSubviews()
         configureServices()
         configureAppearance()
     }
@@ -313,6 +311,15 @@ open class UnderlinedTextView: UIView, ResetableField, RespondableField {
 
     /// Use when you don't need custom constraints
     public func configureDefaultLayout() {
+        addSubview(textView)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+
+        addSubview(hintLabel)
+        hintLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        addSubview(clearButton)
+        clearButton.translatesAutoresizingMaskIntoConstraints = false
+
         let heightConstraint = textView.heightAnchor.constraint(equalToConstant: 20)
         let topConstraint = textView.topAnchor.constraint(equalTo: topAnchor, constant: 28)
         let bottomConstraint = hintLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 9)
@@ -335,6 +342,7 @@ open class UnderlinedTextView: UIView, ResetableField, RespondableField {
         self.textViewTopConstraint = topConstraint
         self.textViewHeightConstraint = heightConstraint
         self.textViewBottomConstraint = bottomConstraint
+        configuration = UnderlinedTextViewConfiguration()
     }
 
 }
@@ -666,23 +674,6 @@ private extension UnderlinedTextView {
 
     func textViewHeight() -> CGFloat {
         return textView.text.height(forWidth: textView.bounds.size.width, font: configuration.textField.font, lineHeight: nil)
-    }
-
-}
-
-// MARK: - Layout
-
-private extension UnderlinedTextView {
-
-    func configureSubviews() {
-        addSubview(textView)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-
-        addSubview(hintLabel)
-        hintLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        addSubview(clearButton)
-        clearButton.translatesAutoresizingMaskIntoConstraints = false
     }
 
 }
