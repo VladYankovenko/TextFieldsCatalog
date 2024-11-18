@@ -85,6 +85,10 @@ final class SumTextField: UnderlinedTextField {
 private extension SumTextField {
 
     func configureAppearance() {
+        configureTextFieldLayout()
+        configureHintLabelLayout()
+        configureActionButtonLayout()
+
         let configuration = UnderlinedTextFieldConfiguration()
         configuration.line = LineConfiguration(insets: UIEdgeInsets(top: 9, left: 16, bottom: 0, right: 16),
                                                defaultHeight: 1,
@@ -206,6 +210,44 @@ private extension SumTextField {
             return nil
         }
         return SumTextField.priceFormatter.string(for: number)?.replacingOccurrences(of: ",00", with: "")
+    }
+
+}
+
+// MARK: - Layout
+
+private extension SumTextField {
+
+    func configureTextFieldLayout() {
+        addSubview(textField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            textField.topAnchor.constraint(equalTo: topAnchor, constant: 37),
+            textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
+            textField.heightAnchor.constraint(equalToConstant: 54)
+        ])
+    }
+
+    func configureHintLabelLayout() {
+        addSubview(hintLabel)
+        hintLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            hintLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 16),
+            hintLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            hintLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+        ])
+    }
+
+    func configureActionButtonLayout() {
+        addSubview(actionButton)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            actionButton.heightAnchor.constraint(equalToConstant: 44),
+            actionButton.widthAnchor.constraint(equalToConstant: 44),
+            actionButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor)
+        ])
     }
 
 }

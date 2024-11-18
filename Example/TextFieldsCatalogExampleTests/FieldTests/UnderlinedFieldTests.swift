@@ -29,17 +29,20 @@ final class UnderlinedFieldTests: FBSnapshotTestCase {
 
     func testDefaultField() {
         let field = UnderlinedTextField(frame: Constants.frame)
+        field.configureDefaultLayout()
         FBSnapshotVerifyView(field)
     }
 
     func testEmptyField() {
         let field = UnderlinedTextField(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Placeholder"
         FBSnapshotVerifyView(field)
     }
 
     func testEmptyErrorField() {
         let field = UnderlinedTextField(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Placeholder"
         field.setError(with: "Error message", animated: false)
         FBSnapshotVerifyView(field)
@@ -47,6 +50,7 @@ final class UnderlinedFieldTests: FBSnapshotTestCase {
 
     func testEmptyDisabledField() {
         let field = UnderlinedTextField(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Placeholder"
         field.isEnabled = false
         FBSnapshotVerifyView(field)
@@ -54,6 +58,7 @@ final class UnderlinedFieldTests: FBSnapshotTestCase {
 
     func testFilledField() {
         let field = UnderlinedTextField(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Placeholder"
         field.text = "Text"
         FBSnapshotVerifyView(field)
@@ -61,6 +66,7 @@ final class UnderlinedFieldTests: FBSnapshotTestCase {
 
     func testFilledErrorField() {
         let field = UnderlinedTextField(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Placeholder"
         field.text = "Text"
         field.setError(with: "Error message", animated: false)
@@ -69,6 +75,7 @@ final class UnderlinedFieldTests: FBSnapshotTestCase {
 
     func testFilledDisabledField() {
         let field = UnderlinedTextField(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Placeholder"
         field.text = "Text"
         field.isEnabled = false
@@ -77,6 +84,7 @@ final class UnderlinedFieldTests: FBSnapshotTestCase {
 
     func testPasswordEmptyField() {
         let field = UnderlinedTextField(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Password field"
         field.mode = .password(.alwaysVisible)
         FBSnapshotVerifyView(field)
@@ -84,6 +92,7 @@ final class UnderlinedFieldTests: FBSnapshotTestCase {
 
     func testPasswordSecureField() {
         let field = UnderlinedTextField(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Password field"
         field.mode = .password(.alwaysVisible)
         field.text = "password1"
@@ -92,6 +101,7 @@ final class UnderlinedFieldTests: FBSnapshotTestCase {
 
     func testPasswordVisibleField() {
         let field = UnderlinedTextField(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Password field"
         field.mode = .password(.alwaysVisible)
         field.text = "password1"
@@ -101,6 +111,7 @@ final class UnderlinedFieldTests: FBSnapshotTestCase {
 
     func testMultilineErrorMessage() {
         let field = UnderlinedTextField(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.onHeightChanged = { height in
             field.frame.size.height = height
         }

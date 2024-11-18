@@ -29,17 +29,20 @@ final class UnderlinedViewTests: FBSnapshotTestCase {
 
     func testDefaultField() {
         let field = UnderlinedTextView(frame: Constants.frame)
+        field.configureDefaultLayout()
         FBSnapshotVerifyView(field)
     }
 
     func testEmptyField() {
         let field = UnderlinedTextView(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Placeholder"
         FBSnapshotVerifyView(field)
     }
 
     func testEmptyErrorField() {
         let field = UnderlinedTextView(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Placeholder"
         field.setError(with: "Error message", animated: false)
         FBSnapshotVerifyView(field)
@@ -47,6 +50,7 @@ final class UnderlinedViewTests: FBSnapshotTestCase {
 
     func testEmptyDisabledField() {
         let field = UnderlinedTextView(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Placeholder"
         field.isEnabled = false
         FBSnapshotVerifyView(field)
@@ -54,6 +58,7 @@ final class UnderlinedViewTests: FBSnapshotTestCase {
 
     func testFilledField() {
         let field = UnderlinedTextView(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Placeholder"
         field.text = "Text"
         FBSnapshotVerifyView(field)
@@ -61,6 +66,7 @@ final class UnderlinedViewTests: FBSnapshotTestCase {
 
     func testFilledErrorField() {
         let field = UnderlinedTextView(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Placeholder"
         field.text = "Text"
         field.setError(with: "Error message", animated: false)
@@ -69,6 +75,7 @@ final class UnderlinedViewTests: FBSnapshotTestCase {
 
     func testFilledDisabledField() {
         let field = UnderlinedTextView(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.placeholder = "Placeholder"
         field.text = "Text"
         field.isEnabled = false
@@ -77,6 +84,7 @@ final class UnderlinedViewTests: FBSnapshotTestCase {
 
     func testMultilineErrorMessage() {
         let field = UnderlinedTextView(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.onHeightChanged = { height in
             field.frame.size.height = height
         }
@@ -88,6 +96,7 @@ final class UnderlinedViewTests: FBSnapshotTestCase {
 
     func testMultilineText() {
         let field = UnderlinedTextView(frame: Constants.frame)
+        field.configureDefaultLayout()
         field.onHeightChanged = { height in
             field.frame.size.height = height
         }
