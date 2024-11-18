@@ -310,7 +310,7 @@ open class UnderlinedTextView: UIView, ResetableField, RespondableField {
     }
 
     /// Use when you don't need custom constraints
-    public func configureDefaultLayout() {
+    public func configureDefaultLayout(with layoutConfiguration: TextViewLayoutConfiguration) {
         addSubview(textView)
         textView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -321,17 +321,17 @@ open class UnderlinedTextView: UIView, ResetableField, RespondableField {
         clearButton.translatesAutoresizingMaskIntoConstraints = false
 
         let heightConstraint = textView.heightAnchor.constraint(equalToConstant: 20)
-        let topConstraint = textView.topAnchor.constraint(equalTo: topAnchor, constant: 28)
-        let bottomConstraint = hintLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 9)
+        let topConstraint = textView.topAnchor.constraint(equalTo: topAnchor, constant: layoutConfiguration.field.top)
+        let bottomConstraint = hintLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: layoutConfiguration.hint.top)
         NSLayoutConstraint.activate([
-            textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: layoutConfiguration.field.leading),
+            textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: layoutConfiguration.field.trailing),
             topConstraint,
             heightConstraint,
 
             bottomConstraint,
-            hintLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            hintLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            hintLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: layoutConfiguration.hint.leading),
+            hintLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: layoutConfiguration.hint.trailing),
             hintLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 15),
 
             clearButton.topAnchor.constraint(equalTo: topAnchor),

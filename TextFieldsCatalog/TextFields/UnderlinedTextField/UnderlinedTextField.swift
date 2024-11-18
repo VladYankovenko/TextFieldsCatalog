@@ -345,29 +345,29 @@ open class UnderlinedTextField: UIView, ResetableField, RespondableField {
     }
 
     /// Use when you don't need custom constraints
-    public func configureDefaultLayout() {
+    public func configureDefaultLayout(with layoutConfiguration: TextFieldLayoutConfiguration) {
         addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: topAnchor, constant: 18),
-            textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            textField.topAnchor.constraint(equalTo: topAnchor, constant: layoutConfiguration.field.top),
+            textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: layoutConfiguration.field.leading),
+            textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: layoutConfiguration.field.trailing),
             textField.heightAnchor.constraint(equalToConstant: 30)
         ])
 
         addSubview(hintLabel)
         hintLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            hintLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 9),
-            hintLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            hintLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            hintLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: layoutConfiguration.hint.top),
+            hintLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: layoutConfiguration.hint.leading),
+            hintLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: layoutConfiguration.hint.trailing),
             hintLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 15)
         ])
 
         addSubview(actionButton)
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: layoutConfiguration.action.trailing),
             actionButton.heightAnchor.constraint(equalToConstant: 44),
             actionButton.widthAnchor.constraint(equalToConstant: 44),
             actionButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor)

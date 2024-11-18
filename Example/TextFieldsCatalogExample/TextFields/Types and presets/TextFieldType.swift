@@ -62,7 +62,7 @@ enum TextFieldType: CaseIterable {
         switch self {
         case .underlined:
             let textField = UnderlinedTextField(frame: frame)
-            textField.configureDefaultLayout()
+            textField.configureDefaultLayout(with: .default)
             return textField
         case .box:
             return BoxTextField(frame: frame)
@@ -70,7 +70,7 @@ enum TextFieldType: CaseIterable {
             return CustomUnderlinedTextField(frame: frame)
         case .underlinedTextView:
             let textView = UnderlinedTextView(frame: frame)
-            textView.configureDefaultLayout()
+            textView.configureDefaultLayout(with: .default)
             return textView
         case .sumTextField:
             return SumTextField(frame: frame)
