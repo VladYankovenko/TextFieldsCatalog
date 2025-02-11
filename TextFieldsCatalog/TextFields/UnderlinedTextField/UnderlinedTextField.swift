@@ -11,13 +11,7 @@ import UIKit
 
 /// Class for custom textField. Contains UITextFiled, top floating placeholder, underline line under textField and bottom label with some info.
 /// Standart height equals 77.
-open class UnderlinedTextField: InnerDesignableView, ResetableField, RespondableField {
-
-    // MARK: - IBOutlets
-
-    @IBOutlet private weak var textField: InnerTextField!
-    @IBOutlet private weak var hintLabel: UILabel!
-    @IBOutlet private weak var actionButton: IconButton!
+open class UnderlinedTextField: UIView, ResetableField, RespondableField {
 
     // MARK: - Private Properties
 
@@ -65,6 +59,10 @@ open class UnderlinedTextField: InnerDesignableView, ResetableField, Respondable
     open var maxLength: Int?
 
     // MARK: - Public Properties
+
+    public var textField = InnerTextField()
+    public var hintLabel = UILabel()
+    public var actionButton = IconButton()
 
     public var field: InnerTextField {
         return textField
@@ -226,7 +224,7 @@ open class UnderlinedTextField: InnerDesignableView, ResetableField, Respondable
     public func setup(placeholderServices: [AbstractPlaceholderService]) {
         self.placeholderServices = placeholderServices
         for service in placeholderServices {
-            service.provide(superview: self.view, field: textField)
+            service.provide(superview: self, field: textField)
             service.configurePlaceholder(fieldState: state,
                                          containerState: containerState)
             service.updateContent(fieldState: state,
@@ -237,7 +235,7 @@ open class UnderlinedTextField: InnerDesignableView, ResetableField, Respondable
 
     /// Allows you to add new placeholder service
     public func add(placeholderService service: AbstractPlaceholderService) {
-        service.provide(superview: self.view, field: textField)
+        service.provide(superview: self, field: textField)
         service.configurePlaceholder(fieldState: state,
                                      containerState: containerState)
         service.updateContent(fieldState: state,
@@ -302,7 +300,7 @@ open class UnderlinedTextField: InnerDesignableView, ResetableField, Respondable
 
     /// Allows to set accessibilityIdentifier for textField and its internal elements
     public func setTextFieldIdentifier(_ identifier: String) {
-        view.accessibilityIdentifier = identifier
+        accessibilityIdentifier = identifier
         textField.accessibilityIdentifier = identifier + AccessibilityIdentifiers.field
         actionButton.accessibilityIdentifier = identifier + AccessibilityIdentifiers.button
         hintLabel.accessibilityIdentifier = identifier + AccessibilityIdentifiers.hint
@@ -346,6 +344,37 @@ open class UnderlinedTextField: InnerDesignableView, ResetableField, Respondable
         self.lastViewHeight = height
     }
 
+    /// Use when you don't need custom constraints
+    public func configureDefaultLayout(with layoutConfiguration: TextFieldLayoutConfiguration) {
+        addSubview(textField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            textField.topAnchor.constraint(equalTo: topAnchor, constant: layoutConfiguration.field.top),
+            textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: layoutConfiguration.field.leading),
+            textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: layoutConfiguration.field.trailing),
+            textField.heightAnchor.constraint(equalToConstant: 30)
+        ])
+
+        addSubview(hintLabel)
+        hintLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            hintLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: layoutConfiguration.hint.top),
+            hintLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: layoutConfiguration.hint.leading),
+            hintLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: layoutConfiguration.hint.trailing),
+            hintLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 15)
+        ])
+
+        addSubview(actionButton)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: layoutConfiguration.action.trailing),
+            actionButton.heightAnchor.constraint(equalToConstant: 44),
+            actionButton.widthAnchor.constraint(equalToConstant: 44),
+            actionButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor)
+        ])
+        configuration = UnderlinedTextFieldConfiguration()
+    }
+
 }
 
 // MARK: - Configure
@@ -367,7 +396,7 @@ private extension UnderlinedTextField {
         lineService?.setup(configuration: configuration.line)
         hintService.provide(label: self.hintLabel)
         for service in placeholderServices {
-            service.provide(superview: self.view, field: textField)
+            service.provide(superview: self, field: textField)
         }
 
         fieldService?.configureBackground()
@@ -385,6 +414,7 @@ private extension UnderlinedTextField {
     }
 
     func configureActionButton() {
+        actionButton.addTarget(self, action: #selector(tapOnActionButton), for: .touchUpInside)
         actionButton.isHidden = true
     }
 
@@ -394,7 +424,8 @@ private extension UnderlinedTextField {
 
 extension UnderlinedTextField {
 
-    @IBAction private func tapOnActionButton(_ sender: UIButton) {
+    @objc
+    private func tapOnActionButton(_ sender: UIButton) {
         onActionButtonTap?(self, sender)
         guard case .password = mode else {
             return

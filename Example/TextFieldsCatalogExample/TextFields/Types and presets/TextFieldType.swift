@@ -61,13 +61,17 @@ enum TextFieldType: CaseIterable {
     func createField(for frame: CGRect) -> UIView {
         switch self {
         case .underlined:
-            return UnderlinedTextField(frame: frame)
+            let textField = UnderlinedTextField(frame: frame)
+            textField.configureDefaultLayout(with: .default)
+            return textField
         case .box:
             return BoxTextField(frame: frame)
         case .customUnderlined:
             return CustomUnderlinedTextField(frame: frame)
         case .underlinedTextView:
-            return UnderlinedTextView(frame: frame)
+            let textView = UnderlinedTextView(frame: frame)
+            textView.configureDefaultLayout(with: .default)
+            return textView
         case .sumTextField:
             return SumTextField(frame: frame)
         }

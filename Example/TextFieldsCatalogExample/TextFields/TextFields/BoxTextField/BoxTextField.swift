@@ -15,7 +15,7 @@ final class BoxTextField: UnderlinedTextField {
 
     // MARK: - IBOutlets
 
-    @IBOutlet private weak var containerView: UIView!
+    private var containerView = UIView()
 
     // MARK: - Initialization
 
@@ -59,6 +59,11 @@ final class BoxTextField: UnderlinedTextField {
 private extension BoxTextField {
 
     func configureAppearance() {
+        configureContainerViewLayout()
+        configureTextFieldLayout()
+        configureHintLabelLayout()
+        configureActionButtonLayout()
+
         let configuration = UnderlinedTextFieldConfiguration()
         configuration.line = LineConfiguration(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
                                                defaultHeight: 1,
@@ -128,6 +133,56 @@ private extension BoxTextField {
             color = Color.UnderlineTextField.normal
         }
         containerView.layer.borderColor = color.cgColor
+    }
+
+}
+
+// MARK: - Layout
+
+private extension BoxTextField {
+
+    func configureContainerViewLayout() {
+        addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: topAnchor, constant: 49),
+            containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            containerView.heightAnchor.constraint(equalToConstant: 60)
+        ])
+    }
+
+    func configureTextFieldLayout() {
+        addSubview(textField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            textField.topAnchor.constraint(equalTo: topAnchor, constant: 49),
+            textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            textField.heightAnchor.constraint(equalToConstant: 60)
+        ])
+    }
+
+    func configureHintLabelLayout() {
+        addSubview(hintLabel)
+        hintLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            hintLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 6),
+            hintLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            hintLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            hintLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 16)
+        ])
+    }
+
+    func configureActionButtonLayout() {
+        addSubview(actionButton)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            actionButton.heightAnchor.constraint(equalToConstant: 44),
+            actionButton.widthAnchor.constraint(equalToConstant: 44),
+            actionButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor)
+        ])
     }
 
 }
